@@ -1,7 +1,7 @@
 %% File Information
 % Authors: Anqi Bao and Can Pu
 % Date of Creation: June 3, 2018
-% Date of Last Modification: June 3, 2018
+% Date of Last Modification: June 4, 2018
 % Notes:    1. The file needs the toolbox "Vectorized Numerical
 %               Integration", which can be downloaded from 
 %               https://www.mathworks.com/matlabcentral/fileexchange/48931-vectorized-numerical-integration-matlab?s_tid=mwa_osa_a
@@ -78,16 +78,20 @@ classdef DiscreteOrdinateSolver
         interaction_fcn = @(x, y) 1
         absorption_fcn = @(x, y) 0.5
         scattering_fcn = @(x, y) 0.5
-        source_fcn = @(x,y) 1
+        source_fcn = @(x, y) 1
         
-        % 
+        % Cell Data
+        cell_types = CellType(1, 1)
+        cells = Cell(0.5, 0.5, 1, 1)
         
     end
     methods
         
         function obj = set_domain_lim(obj, x_start, x_end, y_start, y_end)
             % Function: set the starting and ending points along x- and
-            %               y-axis of the domain
+            %               y-axis of the domain, and initiate the cell
+            %               type array, cell array, active cell indices
+            %               dissected 
             % Inputs:   x_start
             %           x_end
             %           y_start
@@ -97,6 +101,9 @@ classdef DiscreteOrdinateSolver
             obj.x_end = x_end;
             obj.y_start = y_start;
             obj.y_end = y_end;
+            obj.cell_types = CellType(x_end - x_start, y_end - y_start);
+            obj.cells = Cell((x_end + x_start) / 2, (y_end + y_start) / 2, ...
+                1, obj.spatial_pt);
         end
         
         function obj = set_interaction_function(obj, function_handle)
@@ -156,6 +163,14 @@ classdef DiscreteOrdinateSolver
                 natural_numbers((mu < 0) & (eta) > 0), ...
                 natural_numbers((mu < 0) & (eta) < 0), ...
                 natural_numbers((mu > 0) & (eta) < 0)];
+        end
+        
+        function obj = refine(cell_index)
+            % Function: not defined
+        end
+        
+        function obj = derefine(cell_index)
+            % Function: not defined
         end
         
     end
