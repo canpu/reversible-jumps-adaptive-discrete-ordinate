@@ -134,7 +134,9 @@ classdef DiscreteOrdinateSolver
             % Function: set the degree of polynomials used in spatial
             %	discretization and compute the corresponding quadrature
             %	set
-            % Input: n - the order of Gauss-Legendre quadrature set
+            % Input: n - the order of Gauss-Legendre quadrature set; has to
+            %           be 2 for now
+            assert(n == 2, 'Currently the solver only works with spatial Gauss-Legendre quadrature of order 2.');
             obj.spatial_order = n;
             [obj.spatial_pt, obj.spatial_wt] = GLegIntP(n);
         end
@@ -144,7 +146,7 @@ classdef DiscreteOrdinateSolver
             %   the corresponding quadrature set and group directions by
             %   quadrant
             % Inpupt: n - the order of Gauss-Legendre and Gauss-Chebyshev
-            %   quadrature sets
+            %   quadrature sets; has to be even for now
             assert(mod(n, 2) == 0, 'The angular order cannot be set to odd');
             [mu, w_mu] = GLegIntP(n);
             [eta, w_eta] = GCIntP(n);
