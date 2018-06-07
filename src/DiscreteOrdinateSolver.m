@@ -68,6 +68,9 @@ classdef DiscreteOrdinateSolver
         angular_wt = [pi/2; pi/2]
         quad_dir_indices = [4 2 1 3]
         
+        unit_square_basis
+        incoming_flux
+        
         % Geometry Properties
         x_start = 0
         x_end = 1
@@ -83,6 +86,8 @@ classdef DiscreteOrdinateSolver
         % Cell Data
         cell_types = CellType(1, 1)
         cells = Cell(0.5, 0.5, 1, 1)
+        act_cell_indices
+        dis_cell_indices
         
     end
     methods
@@ -91,7 +96,7 @@ classdef DiscreteOrdinateSolver
             % Function: set the starting and ending points along x- and
             %               y-axis of the domain, and initiate the cell
             %               type array, cell array, active cell indices
-            %               dissected 
+            %               dissected cell indices
             % Inputs:   x_start
             %           x_end
             %           y_start
@@ -167,12 +172,47 @@ classdef DiscreteOrdinateSolver
                 natural_numbers((mu > 0) & (eta) < 0)];
         end
         
-        function obj = refine(cell_index)
-            % Function: not defined
+        function obj = set_uniform_mesh(nx, ny)
+            % Function Name: set_uniform_mesh
+            % Brief: Generate uniform mesh with specified number of cells
+            %           along each axis
+            % Inputs:   nx - the number of cells along x-axis
+            %           ny - the number of cells along y-axis
+            %% Has not started working on this function yet
         end
         
-        function obj = derefine(cell_index)
-            % Function: not defined
+        function obj = get_fem_basis(obj)
+            % Function Name: get_fem_basis
+            % Breif: Get the polynomial basis of degree 2 in a sqaure
+            %           [0, 1] X [0, 1]
+            % Output: polynomials - an 8X1 array of Polynomial objects; the eight
+            %           polynomials are for nodes (0, 0), (0, 1), (1, 1), (1,0),
+            %           (0, 0.5), (0.5, 1), (1, 0.5), (0.5, 0) in order
+            %% Replace this section with code
+        end
+        
+        function obj = sweep(obj, direction_index)
+            %% Has not started working on this function yet
+        end
+        
+        function obj = sweep(obj)
+            %% Has not started working on this function yet
+        end
+        
+        function obj = source_iterate(obj, tolerance)
+            %% We do not work on this function in Phase 1
+        end
+        
+        function obj = eval(obj, x, y)
+            %% Has not started working on this function yet
+        end
+        
+        function obj = refine(obj, cell_index)
+            %% We do not complete this function in Phase 1
+        end
+        
+        function obj = derefine(obj, cell_index)
+            %% We do not complete this function in Phase 1
         end
         
     end
