@@ -25,7 +25,7 @@ classdef Quadrature < handle
         wt
     end
     
-    methods (Access = 'public')
+    methods (Access = public)
         function obj = Quadrature(type, varargin)
             switch type
                 case 'interior'
@@ -33,7 +33,7 @@ classdef Quadrature < handle
                     obj.order = 2;
                     tmp = 1 / sqrt(3);
                     obj.pt = ([-tmp -tmp; -tmp tmp; tmp -tmp; tmp tmp] + 1) / 2;
-                    obj.wt = 0.5 * ones(4, 1);
+                    obj.wt = 0.25 * ones(4, 1);
                 case 'boundary'
                     assert(nargin == 1, 'When an Quadrature object is boundary, the order is fixed to 2.');
                     obj.order = 2;

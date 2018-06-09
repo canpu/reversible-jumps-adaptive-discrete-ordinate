@@ -3,10 +3,10 @@
 % Date of Creation: June 9, 2018
 % Date of Last Modification: June 9, 2018
 
-%% Class Definition
+%% Unit Tests Definition
 classdef DiscreteOrdinateSolverTest < matlab.unittest.TestCase
     % Class Name: DiscreteOrdinateSolverTest
-    % Tests:    
+    % Tests:    verify_basis_for_unit_square
     properties
         discrete_ordinate_solver;
     end

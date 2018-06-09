@@ -1,9 +1,11 @@
-addpath('../src');
+function run_tests()
+    addpath('../src');
 
-%% CellTest
+    %% Quadrature 
+    runtests('QuadratureTest');
 
-%% DiscreteOrdinateSolverTest
-runtests('DiscreteOrdinateSolverTest');
+    %% DiscreteOrdinateSolver
+    runtests('DiscreteOrdinateSolverTest');
+    
 
-
-
+end
