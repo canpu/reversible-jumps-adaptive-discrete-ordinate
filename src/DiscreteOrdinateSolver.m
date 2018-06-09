@@ -172,7 +172,7 @@ classdef DiscreteOrdinateSolver
                 natural_numbers((mu > 0) & (eta) < 0)];
         end
         
-        function obj = set_uniform_mesh(nx, ny)
+        function obj = set_uniform_mesh(obj, nx, ny)
             % Function Name: set_uniform_mesh
             % Brief: Generate uniform mesh with specified number of cells
             %           along each axis
@@ -188,7 +188,11 @@ classdef DiscreteOrdinateSolver
             % Output: polynomials - an 8X1 array of Polynomial objects; the eight
             %           polynomials are for nodes (0, 0), (0, 1), (1, 1), (1,0),
             %           (0, 0.5), (0.5, 1), (1, 0.5), (0.5, 0) in order
-            %% Replace this section with code
+            obj.unit_square_basis = [
+                Polynomial([-2 -2 2 5 2 -3 -3 1]); Polynomial([2 -2 0 -1 2 0 -1 0]); ...
+                Polynomial([2 2 0 -3 0 0 0 0]); Polynomial([-2 2 2 -1 0 -1 0 0]); ...
+                Polynomial([0 4 0 -4 -4 0 4 0]); Polynomial([-4 0 0 4 0 0 0 0]); ...
+                Polynomial([-4 0 0 4 0 0 0 0]); Polynomial([0 -4 0 4 0 0 0 0])];
         end
         
         function obj = sweep(obj, direction_index)
