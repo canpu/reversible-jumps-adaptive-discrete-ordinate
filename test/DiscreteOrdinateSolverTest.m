@@ -14,7 +14,7 @@ classdef DiscreteOrdinateSolverTest < matlab.unittest.TestCase
     methods (TestMethodSetup)
         function createTestObject(test)
             test.discrete_ordinate_solver = DiscreteOrdinateSolver;
-            test.discrete_ordinate_solver.generate_fem_basis();
+            test.discrete_ordinate_solver.generate_unit_square_basis();
         end
     end
  

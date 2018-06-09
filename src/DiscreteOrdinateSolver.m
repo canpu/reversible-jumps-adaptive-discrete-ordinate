@@ -3,7 +3,7 @@
 % Date of Creation: June 3, 2018
 % Date of Last Modification: June 9, 2018
 % Notes:    1. The file needs the toolbox "Vectorized Numerical
-%               Integration", which can be downloaded from 
+%               Integration", which can be downloaded from
 %               https://www.mathworks.com/matlabcentral/fileexchange/48931-vectorized-numerical-integration-matlab?s_tid=mwa_osa_a
 %           2. The file is not completed.
 
@@ -145,30 +145,18 @@ classdef DiscreteOrdinateSolver < handle
             [obj.spatial_pt, obj.spatial_wt] = GLegIntP(n);
         end
         
-        function obj = set_angular_order(obj, n)
+        function generate_quadrature(obj, n)
             % Function: set the order of angular discretization, compute
             %   the corresponding quadrature set and group directions by
             %   quadrant
             % Inpupt: n - the order of Gauss-Legendre and Gauss-Chebyshev
             %   quadrature sets; has to be even for now
-            assert(mod(n, 2) == 0, 'The angular order cannot be set to odd');
-            [mu, w_mu] = GLegIntP(n);
-            [eta, w_eta] = GCIntP(n);
-            [mu, eta] = meshgrid(mu, eta);
-            [w_mu, w_eta] = meshgrid(w_mu, w_eta);
-            mu = mu(:);
-            eta = eta(:);
-            w_mu = w_mu(:);
-            w_eta = w_eta(:);
-            natural_numbers = (1:n*n)';
-            obj.angular_order = n;
-            obj.angular_pt = [mu, eta];
-            obj.angular_wt = w_mu .* w_eta;
-            obj.quad_dir_indices = [ ...
-                natural_numbers((mu > 0) & (eta) > 0), ...
-                natural_numbers((mu < 0) & (eta) > 0), ...
-                natural_numbers((mu < 0) & (eta) < 0), ...
-                natural_numbers((mu > 0) & (eta) < 0)];
+                    natural_numbers = (1:n*n)';
+                    obj.quad_dir_indices = [ ...
+                        natural_numbers((mu > 0) & (eta) > 0), ...
+                        natural_numbers((mu < 0) & (eta) > 0), ...
+                        natural_numbers((mu < 0) & (eta) < 0), ...
+                        natural_numbers((mu > 0) & (eta) < 0)];
         end
         
         function obj = set_uniform_mesh(obj, nx, ny)
@@ -180,7 +168,8 @@ classdef DiscreteOrdinateSolver < handle
             %% Has not started working on this function yet
         end
         
-        function generate_fem_basis(obj)
+        
+        function generate_unit_square_basis(obj)
             % Function Name: get_fem_basis
             % Breif: Get the polynomial basis of degree 2 in a sqaure
             %           [0, 1] X [0, 1]
@@ -193,6 +182,7 @@ classdef DiscreteOrdinateSolver < handle
                 Polynomial([0 4 0 -4 -4 0 4 0]); Polynomial([-4 0 0 4 0 0 0 0]); ...
                 Polynomial([0 -4 0 4 0 0 0 0]); Polynomial([4 0 -4 -4 0 4 0 0])];
         end
+        
         
         function sweep(obj, varargin)
             %% Has not started working on this function yet
