@@ -181,24 +181,50 @@ classdef DiscreteOrdinateSolver
             %% Has not started working on this function yet
         end
         
-        function obj = get_fem_basis(obj)
+        function obj = get_fem_basis(x, y)
             % Function Name: get_fem_basis
             % Breif: Get the polynomial basis of degree 2 in a sqaure
             %           [0, 1] X [0, 1]
             % Output: polynomials - an 8X1 array of Polynomial objects; the eight
             %           polynomials are for nodes (0, 0), (0, 1), (1, 1), (1,0),
             %           (0, 0.5), (0.5, 1), (1, 0.5), (0.5, 0) in order
-            %% Replace this section with code
+            %%
+        POLY=[1;x;y;x^2;x*y;y^2;x^2*y;x*y^2];
+        %A=[1,0,0,0,0,0,0,0;
+        %   1,0,1,0,0,1,0,0;
+        %   1,1,1,1,1,1,1,1;
+        %   1,1,0,1,0,0,0,0;
+        %   1,0,0.5,0,0,0.25,0,0;
+        %   1,0.5,1,0.25,0.5,1,0.25,0.5;
+        %   1,1,0.5,1,0.5,0.25,0.5,0.25;
+        %   1,0.5,0,0.25,0,0,0,0]
+         N1C=[1,    -3,    -3,     2,     5,     2,    -2,    -2]
+         N2C= [  0,     0,    -1,     0,    -1,     2,     2,    -2]
+         N3C=[0,     0,     0,     0,    -3,     0,     2,     2]
+         N4C=[0,    -1,     0,     2,    -1,     0,    -2,     2]
+         N5C=[0,     0,     4,     0,    -4,    -4,     0,     4]
+         N6C= [0,     0,     0,     0,     4,     0,    -4,     0]
+         N7C=[0,     0,     0,     0,     4,     0,     0,    -4]
+         N8C=[0, 4, 0, -4, -4, 0, 4, 0]
+         N1=N1C*POLY;
+         N2=N2C*POLY;
+         N3=N3C*POLY;
+         N4=N4C*POLY;
+         N5=N5C*POLY;
+         N6=N6C*POLY;
+         N7=N7C*POLY;
+         N8=N8C*POLY;
+         obj=[N1,N2,N3,N4,N5,N6,N7,N8];
         end
-        
+
         function obj = sweep(obj, direction_index)
             %% Has not started working on this function yet
         end
-        
+
         function obj = sweep(obj)
             %% Has not started working on this function yet
         end
-        
+
         function obj = source_iterate(obj, tolerance)
             %% We do not work on this function in Phase 1
         end
