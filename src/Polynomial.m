@@ -1,5 +1,5 @@
 %% File Information
-% Authors: Anqi Bao and Can Pu
+% Authors: Can Pu
 % Date of Creation: June 4, 2018
 % Date of Last Modification: June 9, 2018
 
@@ -15,9 +15,6 @@ classdef Polynomial
     %               position
     %           gradient() - compute the gradient (a 2X1 array of
     %           	polynomials) of the polynomial
-    %           transform_from_unit_square(x_start, x_end, y_start, y_end)
-    %               - transform the polynomial defined in [0, 1]X[0, 1] to
-    %               the specified range
     properties (Access = private)
         coeff
     end
@@ -49,10 +46,6 @@ classdef Polynomial
                 obj.coeff(2) 2*obj.coeff(3) obj.coeff(4) obj.coeff(6)]); ...
                 Polynomial([0 0 obj.coeff(1) 2*obj.coeff(2) 0 obj.coeff(4) ...
                 2*obj.coeff(5) obj.coeff(7)])];
-        end
-        
-        function transform_from_unit_square(obj, x_start, x_end, y_start, y_end)
-            %% Fill this section by code
         end
     end
 end
