@@ -4,7 +4,7 @@
 % Date of Last Modification: June 9, 2018
 
 %% Class Definition
-classdef Polynomial
+classdef Polynomial < handle
     % Class Name: Polynomial
     % Brief: A polynomial with two variables x and y of degree 3
     % Properties:   coeff - a 1X8 vector of coefficients of monomials; the
@@ -15,15 +15,16 @@ classdef Polynomial
     %               position
     %           gradient() - compute the gradient (a 2X1 array of
     %           	polynomials) of the polynomial
-    properties (Access = private)
+    properties (Access = 'private')
         coeff
     end
     
-    methods (Access = public)
+    methods (Access = 'public')
         function obj = Polynomial(coeff)
             % Function: Constructor
             % Brief: Initialize an object with specified coefficients
-            obj.coeff = coeff;
+            coeff = [coeff(:)' zeros(1, max(0, 8 - numel(coeff)))];
+            obj.coeff = coeff(1:8);
         end
         
         function val = eval(obj, x, y)
@@ -31,7 +32,7 @@ classdef Polynomial
             % Brief: Evaluate the value of the polynomial at given position
             % Input: x, y
             % Notes: This function works with vectors of x's and y's
-            assert(size(x) == size(y), 'The size of x and y must match.');
+            assert(all(size(x) == size(y)), 'The size of x and y must match.');
             val = obj.coeff(1) * x.^2 .* y + obj.coeff(2) * x .* y.^2 + ...
                 obj.coeff(3) * x.^2 + obj.coeff(4) * x .* y + ...
                 obj.coeff(5) * y.^2 + obj.coeff(6) * x + obj.coeff(7) * y + ...

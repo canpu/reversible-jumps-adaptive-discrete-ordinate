@@ -8,7 +8,7 @@
 %           2. The file is not completed.
 
 %% Class Definition
-classdef DiscreteOrdinateSolver
+classdef DiscreteOrdinateSolver < handle
     % Class name: DiscreteOrdinateSolver
     % Breif: The class is a discrete ordinate solver for a 2D
     %           isotropic advection-scattering problem
@@ -57,7 +57,7 @@ classdef DiscreteOrdinateSolver
     %                               the evaluate function, the error
     %                               function, single cell sweep, iterate,
     %                               basis polynomial, Jacobian
-    properties
+    properties (Access = 'public')
         
         % Quadrature
         spatial_order = 2
@@ -84,13 +84,12 @@ classdef DiscreteOrdinateSolver
         source_fcn = @(x, y) 1
         
         % Cell Data
-        cell_types = CellType(1, 1)
-        cells = Cell(0.5, 0.5, 1, 1)
+        cells
         act_cell_indices
         dis_cell_indices
         
     end
-    methods
+    methods (Access = 'public')
         
         function obj = set_domain_lim(obj, x_start, x_end, y_start, y_end)
             % Function: set the starting and ending points along x- and
@@ -181,7 +180,7 @@ classdef DiscreteOrdinateSolver
             %% Has not started working on this function yet
         end
         
-        function obj = get_fem_basis(obj)
+        function generate_fem_basis(obj)
             % Function Name: get_fem_basis
             % Breif: Get the polynomial basis of degree 2 in a sqaure
             %           [0, 1] X [0, 1]
@@ -192,30 +191,26 @@ classdef DiscreteOrdinateSolver
                 Polynomial([-2 -2 2 5 2 -3 -3 1]); Polynomial([2 -2 0 -1 2 0 -1 0]); ...
                 Polynomial([2 2 0 -3 0 0 0 0]); Polynomial([-2 2 2 -1 0 -1 0 0]); ...
                 Polynomial([0 4 0 -4 -4 0 4 0]); Polynomial([-4 0 0 4 0 0 0 0]); ...
-                Polynomial([-4 0 0 4 0 0 0 0]); Polynomial([0 -4 0 4 0 0 0 0])];
+                Polynomial([0 -4 0 4 0 0 0 0]); Polynomial([4 0 -4 -4 0 4 0 0])];
         end
         
-        function obj = sweep(obj, direction_index)
-            %% Has not started working on this function yet
-        end
-        afds
-        function obj = sweep(obj)
+        function sweep(obj, varargin)
             %% Has not started working on this function yet
         end
         
-        function obj = source_iterate(obj, tolerance)
+        function source_iterate(obj, tolerance)
             %% We do not work on this function in Phase 1
         end
         
-        function obj = eval(obj, x, y)
+        function val = eval(obj, x, y)
             %% Has not started working on this function yet
         end
         
-        function obj = refine(obj, cell_index)
+        function refine(obj, cell_index)
             %% We do not complete this function in Phase 1
         end
         
-        function obj = derefine(obj, cell_index)
+        function derefine(obj, cell_index)
             %% We do not complete this function in Phase 1
         end
         

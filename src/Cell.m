@@ -4,7 +4,7 @@
 % Date of Last Modification: June 6, 2018
 
 %% Class Definition
-classdef Cell
+classdef Cell < handle
     % Class Name: Cell
     % Properties:   x_start
     %               y_start
@@ -80,7 +80,7 @@ classdef Cell
             
         end
         
-        function obj = set_interaction(obj, interaction_fcn)
+        function set_interaction(obj, interaction_fcn)
             % Function: set_interaction
             % Brief: Compute the interaction parameters at the interior
             %           quadrature points
@@ -90,7 +90,7 @@ classdef Cell
                 obj.int_quad_pt(:, 2));
         end
         
-        function obj = set_absorption(obj, absorption_fcn)
+        function set_absorption(obj, absorption_fcn)
             % Function: set_absorption
             % Brief: Compute the absorption parameters at the interior
             %           quadrature points
@@ -100,7 +100,7 @@ classdef Cell
                 obj.int_quad_pt(:, 2));
         end
         
-        function obj = set_scattering(obj, scattering_fcn)
+        function set_scattering(obj, scattering_fcn)
             % Function: set_scattering
             % Brief: Compute the scattering parameters at the interior
             %           quadrature points
@@ -110,7 +110,7 @@ classdef Cell
                 obj.int_quad_pt(:, 2));
         end
         
-        function obj = set_external_source(obj, external_source_fcn)
+        function set_external_source(obj, external_source_fcn)
             % Function: set_external_source
             % Brief: Compute the external source at the interior
             %           quadrature points
@@ -120,7 +120,7 @@ classdef Cell
                 obj.int_quad_pt(:, 2));
         end
         
-        function obj = update_scattering_source(obj)
+        function update_scattering_source(obj)
             % Function: update_scattering_source
             % Brief: Update the scattering source based on angular flux and
             %           scattering parameter
@@ -129,7 +129,7 @@ classdef Cell
             obj.scattering_source_quad_pt = psi_quad_pt .* obj.scattering_quad_pt;
         end
         
-        function obj = set_angular_flux_bound_quad_pt(angular_flux_bound_quad_pt)
+        function set_angular_flux_bound_quad_pt(angular_flux_bound_quad_pt)
             %% Has not started working on this function
         end
         
@@ -137,11 +137,11 @@ classdef Cell
             %% Has not started working on this function
         end
         
-        function obj = compute_local_matrix()
+        function compute_local_matrix()
             %% Has not started working on this function
         end
         
-        function obj = sweep(obj, direction_index)
+        function sweep(obj, direction_index)
             %% Has not started working on this function
         end
         
