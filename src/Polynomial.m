@@ -15,11 +15,11 @@ classdef Polynomial < handle
     %               position
     %           gradient() - compute the gradient (a 2X1 array of
     %           	polynomials) of the polynomial
-    properties (Access = 'private')
+    properties (SetAccess = private, GetAccess = public, Hidden = false)
         coeff
     end
     
-    methods (Access = 'public')
+    methods (Access = public)
         function obj = Polynomial(coeff)
             % Function: Constructor
             % Brief: Initialize an object with specified coefficients
