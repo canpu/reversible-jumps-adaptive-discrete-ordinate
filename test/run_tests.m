@@ -6,7 +6,8 @@ function run_tests()
 
     %% Quadrature 
     runtests('QuadratureTest');
-
+    runtests('AngularQuadratureTest');
+    
     %% DiscreteOrdinateSolver
     runtests('DiscreteOrdinateSolverTest');
     

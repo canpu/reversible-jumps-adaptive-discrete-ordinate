@@ -43,22 +43,5 @@ classdef QuadratureTest < matlab.unittest.TestCase
                 abs(0.5 - test.quadrature.pt(1) - 0.5/sqrt(3)) < test.tol, ...
                 'The boundary quadrature abscissae is incorrect.');
         end
-        
-        function verify_angular_quadrature(test)
-            order = 16;
-            test.quadrature = Quadrature('angular', order);
-            [x_mu, w_mu] = GLegIntP(order);
-            [x_eta, w_eta] = GCIntP(order);
-            test.verifySize(test.quadrature.pt, [order^2 2], ...
-                'The dimension of the angular quadrature abscissae is incorrect');
-            test.verifySize(test.quadrature.wt, [order^2 1], ...
-                'The dimension of the angular quadrature weights is incorrect');
-            test.verifyEqual(unique(test.quadrature.pt(:, 1)), x_mu, ...
-                'The angular Gauss-Legendre quadrature abscissae are incorrect');
-            test.verifyEqual(unique(test.quadrature.pt(:, 2)), x_eta, ...
-                'The angular Gauss-Chebyshev quadrature abscissae are incorrect');
-            test.verifyEqual(test.quadrature.wt(1:order:end), w_mu .* w_eta, ...
-                'The angular Gauss-Chebyshev quadrature abscissae are incorrect');
-        end
     end
 end
