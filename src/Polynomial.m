@@ -53,18 +53,37 @@ classdef Polynomial < handle
     end
     
     methods (Static = true)
-        function polynomials = get_unit_square_basis()
+        function basis = get_unit_square_basis()
             % Function Name: get_unit_square_basis
             % Breif: Get the polynomial basis of degree 2 in a sqaure
             %           [0, 1] X [0, 1]
-            % Output: polynomials - an 8X1 array of Polynomial objects; the eight
+            % Output: basis - an 8X1 array of Polynomial objects; the eight
             %           polynomials are for nodes (0, 0), (0, 1), (1, 1), (1,0),
             %           (0, 0.5), (0.5, 1), (1, 0.5), (0.5, 0) in order
-            polynomials = [
+            basis = [
                 Polynomial([-2 -2 2 5 2 -3 -3 1]); Polynomial([2 -2 0 -1 2 0 -1 0]); ...
                 Polynomial([2 2 0 -3 0 0 0 0]); Polynomial([-2 2 2 -1 0 -1 0 0]); ...
                 Polynomial([0 4 0 -4 -4 0 4 0]); Polynomial([-4 0 0 4 0 0 0 0]); ...
                 Polynomial([0 -4 0 4 0 0 0 0]); Polynomial([4 0 -4 -4 0 4 0 0])];
+        end
+        
+        function basis_grad = get_unit_square_basis_gradient()
+            % Function Name: get_unit_square_basis_gradient
+            % Breif: Get the gradient of polynomial basis of degree 2 in a
+            %           sqaure [0, 1] X [0, 1]
+            % Output: basis - an 8X2 array of Polynomial objects; the eight
+            %           polynomials are for nodes (0, 0), (0, 1), (1, 1), (1,0),
+            %           (0, 0.5), (0.5, 1), (1, 0.5), (0.5, 0) in order;
+            %           the first column corresponds to differentiation wrt
+            %           x while the second is associated with y
+             basis = Polynomial.get_unit_square_basis(); %#ok<NASGU>
+             grad = @(polynomial) polynomial.gradient()'; %#ok<NASGU>
+             cmd = '[grad(basis(1))';
+             for i = 2:8
+                 cmd = [cmd, '; grad(basis(', num2str(i), '))']; %#ok<AGROW>
+             end
+             cmd = [cmd, ']'];
+             basis_grad = eval(cmd);
         end
     end
 end
