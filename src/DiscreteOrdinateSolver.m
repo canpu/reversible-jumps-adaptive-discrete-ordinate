@@ -12,29 +12,10 @@ classdef DiscreteOrdinateSolver < handle
     % Class name: DiscreteOrdinateSolver
     % Breif: The class is a discrete ordinate solver for a 2D
     %           isotropic advection-scattering problem
-    % Properties:   spatial_order - the degree of polynomials used in
-    %                   finite element discretization 
-    %               spatial_pt - a column vector consisting of abscissae
-    %                   of Gauss-Legendre quadrature set in [-1, 1]
-    %               spatial_wt - a column vector consisting of weights of
-    %                   Gauss-Legendre quadrature set in [1, 1]
-    %               angular_order - the order of discrete ordinate
+    % Properties:   angular_order - the order of discrete ordinate
     %                   discretization on the unit spherical surface; we
     %                   only allow even orders in this project
-    %               angular_pt - a matrix consisting of abscissae of
-    %                   the tensor product of Gauss-Legendre and
-    %                   Gauss-Chebyshev quadrature set; each row is an
-    %                   abscissa point consisting of a tuple
-    %               angular_wt - a column vector consisting of weights of
-    %                   the tensor product of Gauss-Legendre and
-    %                   Gauss-Chebyshev quadrature set; each row
-    %                   corresponds to the weight of an abscissa point; sum
-    %                   of all weights is 2*pi
-    %               quad_dir_indices - a matrix recording what quadrant
-    %                   each angular pt belongs to; a column represents a
-    %                   quadrant (from 1 to 4) while each column vector
-    %                   consists of the indices of angular points belonging
-    %                   to that quadrant
+    %               
     %               x_start, x_end, y_start, y_end - limits of the domain
     %               interaction_fcn, absorption_fcn, scattering_fcn,
     %                   source_fcn - the function handles depending on
@@ -105,7 +86,6 @@ classdef DiscreteOrdinateSolver < handle
             obj.x_end = x_end;
             obj.y_start = y_start;
             obj.y_end = y_end;
-            obj.cell_types = CellType(x_end - x_start, y_end - y_start);
             obj.cells = Cell((x_end + x_start) / 2, (y_end + y_start) / 2, ...
                 1, obj.spatial_pt);
         end
@@ -151,12 +131,7 @@ classdef DiscreteOrdinateSolver < handle
             %   quadrant
             % Inpupt: n - the order of Gauss-Legendre and Gauss-Chebyshev
             %   quadrature sets; has to be even for now
-                    natural_numbers = (1:n*n)';
-                    obj.quad_dir_indices = [ ...
-                        natural_numbers((mu > 0) & (eta) > 0), ...
-                        natural_numbers((mu < 0) & (eta) > 0), ...
-                        natural_numbers((mu < 0) & (eta) < 0), ...
-                        natural_numbers((mu > 0) & (eta) < 0)];
+                    
         end
         
         function obj = set_uniform_mesh(obj, nx, ny)
@@ -169,19 +144,7 @@ classdef DiscreteOrdinateSolver < handle
         end
         
         
-        function generate_unit_square_basis(obj)
-            % Function Name: get_fem_basis
-            % Breif: Get the polynomial basis of degree 2 in a sqaure
-            %           [0, 1] X [0, 1]
-            % Output: polynomials - an 8X1 array of Polynomial objects; the eight
-            %           polynomials are for nodes (0, 0), (0, 1), (1, 1), (1,0),
-            %           (0, 0.5), (0.5, 1), (1, 0.5), (0.5, 0) in order
-            obj.unit_square_basis = [
-                Polynomial([-2 -2 2 5 2 -3 -3 1]); Polynomial([2 -2 0 -1 2 0 -1 0]); ...
-                Polynomial([2 2 0 -3 0 0 0 0]); Polynomial([-2 2 2 -1 0 -1 0 0]); ...
-                Polynomial([0 4 0 -4 -4 0 4 0]); Polynomial([-4 0 0 4 0 0 0 0]); ...
-                Polynomial([0 -4 0 4 0 0 0 0]); Polynomial([4 0 -4 -4 0 4 0 0])];
-        end
+        
         
         
         function sweep(obj, varargin)

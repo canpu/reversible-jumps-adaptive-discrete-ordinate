@@ -43,5 +43,16 @@ classdef PolynomialTest < matlab.unittest.TestCase
                     'The gradient method of Polynomial class is incorrect.');
             end
         end
+        
+        function verify_basis_for_unit_square(test)
+            x = [0 0 1 1 0 0.5 1 0.5];
+            y = [0 1 1 0 0.5 1 0.5 0];
+            expected = diag(ones(1, 8));
+            unit_square_basis = Polynomial.get_unit_square_basis();
+            for i = 1:8
+                test.verifyEqual(unit_square_basis(i).eval(x, y), expected(i, :), ...
+                    ['The basis polynomial NO.', num2str(i), ' for the reference square is incorrect.']);
+            end
+        end
     end
 end

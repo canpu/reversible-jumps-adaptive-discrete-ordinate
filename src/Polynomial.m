@@ -15,6 +15,8 @@ classdef Polynomial < handle
     %               position
     %           gradient() - compute the gradient (a 2X1 array of
     %           	polynomials) of the polynomial
+    %           generate_unit_square_basis (Static) - Get the polynomial
+    %               basis of degree 2 in a sqaure [0, 1] X [0, 1]
     properties (SetAccess = private, GetAccess = public, Hidden = false)
         coeff
     end
@@ -47,6 +49,22 @@ classdef Polynomial < handle
                 obj.coeff(2) 2*obj.coeff(3) obj.coeff(4) obj.coeff(6)]); ...
                 Polynomial([0 0 obj.coeff(1) 2*obj.coeff(2) 0 obj.coeff(4) ...
                 2*obj.coeff(5) obj.coeff(7)])];
+        end
+    end
+    
+    methods (Static = true)
+        function polynomials = get_unit_square_basis()
+            % Function Name: get_unit_square_basis
+            % Breif: Get the polynomial basis of degree 2 in a sqaure
+            %           [0, 1] X [0, 1]
+            % Output: polynomials - an 8X1 array of Polynomial objects; the eight
+            %           polynomials are for nodes (0, 0), (0, 1), (1, 1), (1,0),
+            %           (0, 0.5), (0.5, 1), (1, 0.5), (0.5, 0) in order
+            polynomials = [
+                Polynomial([-2 -2 2 5 2 -3 -3 1]); Polynomial([2 -2 0 -1 2 0 -1 0]); ...
+                Polynomial([2 2 0 -3 0 0 0 0]); Polynomial([-2 2 2 -1 0 -1 0 0]); ...
+                Polynomial([0 4 0 -4 -4 0 4 0]); Polynomial([-4 0 0 4 0 0 0 0]); ...
+                Polynomial([0 -4 0 4 0 0 0 0]); Polynomial([4 0 -4 -4 0 4 0 0])];
         end
     end
 end
