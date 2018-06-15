@@ -8,4 +8,4 @@ One must have the following Matlab toolboxes installed before running the code:
 
 ### Variational Formulation
 
-![](http://latex.codecogs.com/gif.latex?\\hat{\Omega}\cdot\nabla\psi)
+![](http://latex.codecogs.com/gif.latex?\$$\hat{\Omega}\cdot\nabla\psi$$)
