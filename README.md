@@ -12,5 +12,5 @@ The original equation is ![](http://latex.codecogs.com/gif.latex?\hat{\Omega}\cd
 
 We multiply both sides by an arbitrary test function ![](http://latex.codecogs.com/gif.latex?u(\vec{r})) and perform integration over the region ![](http://latex.codecogs.com/gif.latex?\mathcal{R}) to get
 
-![](http://latex.codecogs.com/gif.latex?\int_{\partial\mathcal{R}}\hat{\Omega}\cdot\hat{n}\nabla dS(\vec{r})-\int_{\mathcal{R}}\psi(\vec{r},\hat{\Omega})\hat{\Omega}\cdot\nabla u(\vec{r})d\vec{r}+\int_{\mathcal{R}}\sigma_t(\vec{r})\psi(\vec{r})u(\vec{r}))d\vec{r})
+![](http://latex.codecogs.com/gif.latex?\\int_{\partial\mathcal{R}}\hat{\Omega}\cdot\hat{n}\nabla dS(\vec{r})-\int_{\mathcal{R}}\psi(\vec{r},\hat{\Omega})\hat{\Omega}\cdot\nabla u(\vec{r})d\vec{r}+\int_{\mathcal{R}}\sigma_t(\vec{r})\psi(\vec{r})u(\vec{r}))d\vec{r})
 
