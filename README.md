@@ -1,6 +1,4 @@
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-
-# reversible_jumps_adaptive_fem
+# reversible-jumps-adaptive-discrete-ordinate
 
 ## Prerequisites
 One must have the following Matlab toolboxes installed before running the code:
@@ -10,4 +8,4 @@ One must have the following Matlab toolboxes installed before running the code:
 
 ### Variational Formulation
 
-$\vec{r}$
+![](http://latex.codecogs.com/gif.latex?\\hat{\Omega}\cdot\nabla\psi)
