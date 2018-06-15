@@ -1,7 +1,7 @@
 %% File Information
 % Authors: Can Pu
 % Date of Creation: June 9, 2018
-% Date of Last Modification: June 9, 2018
+% Date of Last Modification: June 14, 2018
 % Notes:    1. The file needs the toolbox "Vectorized Numerical
 %               Integration", which can be downloaded from
 %               https://www.mathworks.com/matlabcentral/fileexchange/48931-vectorized-numerical-integration-matlab?s_tid=mwa_osa_a
@@ -9,14 +9,12 @@
 %% Class Definition
 classdef Quadrature < handle
     % Class Name: Quadrature
-    % Brief: The class supports Gauss-Legendre quadrature of order 2 for
-    %           the interior and boundary of a reference square, and
-    %           Legendre-Chebyshev quadrature for angular discretization
+    % Brief: The class supports Gauss-Legendre quadrature of order n for
+    %           the interior of a reference square
     % Properties:   order
     %               pt - the abscissae
     %               wt - a row vector of weights
-    % Methods:  constructor(type) - supported types are 'interior' and
-    %               'boundary'; the order is fixed to 2
+    % Methods:  constructor(order)
     properties (SetAccess = protected, GetAccess = public, Hidden = false)
         order
         pt
@@ -25,22 +23,24 @@ classdef Quadrature < handle
     
     methods (Access = public)
         function obj = Quadrature(varargin)
-            if nargin == 0
-                return;
-            end
-            switch varargin{1}
-                case 'interior'
-                    obj.order = 2;
-                    tmp = 1 / sqrt(3);
-                    obj.pt = ([-tmp -tmp; -tmp tmp; tmp -tmp; tmp tmp] + 1) / 2;
-                    obj.wt = 0.25 * ones(4, 1);
-                case 'boundary'
-                    obj.order = 2;
-                    tmp = 1 / sqrt(3);
-                    obj.pt = ([-tmp; tmp] + 1) / 2;
-                    obj.wt = 0.5 * ones(2, 1);
-                otherwise
-                    error('The specified type of quadrature is not supported.');
+            assert(nargin <= 1);
+            if nargin == 1
+                order = varargin{1};
+                obj.order = order;
+                [x, w_x] = GLegIntP(order);
+                x = (x + 1) / 2;
+                w_x = w_x / 2;
+                y = x;
+                w_y = w_x;
+                [x, y] = meshgrid(x, y);
+                [w_x, w_y] = meshgrid(w_x, w_y);
+                x = x(:);
+                y = y(:);
+                w_x = w_x(:);
+                w_y = w_y(:);
+                obj.order = order;
+                obj.pt = [x, y];
+                obj.wt = w_x .* w_y;
             end
         end
     end
